@@ -45,7 +45,7 @@ class ADERH():
 
 
     def __init__(self,
-                 n_estimators=200,
+                 n_estimators=256,
                  n=18,
                  contamination=0.1,
                  random_state=None):
