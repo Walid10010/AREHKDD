@@ -12,6 +12,8 @@ from deepod.models.tabular import RDP, RCA
 from ARDEH import ADERH
 from sklearn.metrics import roc_auc_score
 import glob
+
+
 algo_dic ={'ADERH':ADERH, 'INNE':INNE, 'IForest':IForest, 'DIF':DIF, 'LOF':LOF, 'LODA': LODA, 'SO_GAAL':SO_GAAL, 'RCA':RCA, 'DBSCAN':DBSCAN, 'OCSVM':OCSVM }
 
 import glob
