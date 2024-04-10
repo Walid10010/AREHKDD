@@ -36,7 +36,7 @@ for data_name in glob.glob('Dataset/*'):
              outlier_score, label = algo.decision_function(X), algo.labels_
              roc_score_value += roc_auc_score(Y, outlier_score) /len(random_seeds)
         else:
-             algo = algo_dic[algo_name](random_state=seed)
+             algo = algo_dic[algo_name]()
              algo.fit(X)
              outlier_score, label = algo.decision_function(X), algo.labels_
              roc_score_value = roc_auc_score(Y, outlier_score) / len(random_seeds)

@@ -84,17 +84,9 @@ class ADERH():
         return diff / norm, norm
 
     def  _nCircle(self, X, cnnIndex, n, distMatrix, center_index):
-        centers = []
-        radius = []
-        set_ = set([])
-        #ab_norm_vector, norm = self._normalized_vector(X, X[cnnIndex])
-        #s = time.time()
-        # return X, distMatrix.reshape(-1)/2
-        X = np.append(X, X[cnnIndex], axis=0)
-        #X = np.append(X, X[cnnIndex], axis=0)
-        radius_matrix = np.repeat(distMatrix.reshape(-1,1)/2, 2, axis=1).reshape(-1, 1)
-        #print(time.time()-s)
 
+        X = np.append(X, X[cnnIndex], axis=0)
+        radius_matrix = np.repeat(distMatrix.reshape(-1,1)/2, 2, axis=1).reshape(-1, 1)
 
         return X, radius_matrix.reshape(-1)
 
@@ -123,18 +115,12 @@ class ADERH():
        # print(self._center.shape)
         random_state = check_random_state(self.random_state)
         self._seeds = random_state.randint(MAX_INT, size=self.n_estimators)
-        import random
-        #random.seed(9001)
-        #random.sample(range(0, n_features, 1), n_features//2)
+
         self.colum_list = []
 
         for i in range(self.n_estimators):
             rnd = check_random_state(self._seeds[i])
-            # randomly selected subsamples of size max_samples_ as centroids.
-            #random.seed(rnd)
-            #ll = random.sample(range(0, nn, 1), nn//2)
-            #self.colum_list.add(ll)
-            #X = X[:, ll]
+
             center_index = rnd.choice(
                 n_samples, self.max_samples_, replace=False)
 
@@ -144,15 +130,11 @@ class ADERH():
             random_neigh_dist =  np.sum ((((self._center[i] - X[radom_neigh_idx]) ** 2)), axis=1)
 
             self._centroids_radius[i] = random_neigh_dist #np.average(random_neigh_dist, axis=0)
-            # Nearest Neighbors of centroids
-            #cnn_index = np.argmin(center_dist, axis=1)
+
             cnn_index = radom_neigh_idx
             self._center2[i], self._centroids_radius2[i] =  self._nCircle(self._center[i], cnn_index, factor, random_neigh_dist, center_index)
 
-            #cnn_radius = self._centroids_radius[i][cnn_index]
 
-            #self._ratio[i] = 1 - (cnn_radius + MIN_FLOAT) / \
-                         #   (self._centroids_radius[i] + MIN_FLOAT)
         return self
 
     def decision_function(self, X):
@@ -175,10 +157,7 @@ class ADERH():
             self._centroids_radius[i] = np.where(
                 self._centroids_radius[i] !=0,
                 self._centroids_radius[i],1e-5)
-            # find instances that are covered by at least one hypersphere.
-            # cover_radius = np.where(
-            #     x_dists <=  self._centroids_radius[i]  ,
-            #    self._centroids_radius[i], np.nan)
+
             cover_radius = np.where(
                x_dists <=  self._centroids_radius[i],
               x_dists, np.nan)
@@ -192,7 +171,7 @@ class ADERH():
 
             v = adjusted_sigmoid(v)
 
-            den = self._loop_translate(cnn_x, dicc)  #np.array([dicc[x] for x in unique])[counts].reshape(cnn_x.shape)
+            den = self._loop_translate(cnn_x, dicc)
             den /=self._centroids_radius2[i][cnn_x]
             den = (den/den.max())
             aderh_score[i][x_covered] = (((1-den))) * v
