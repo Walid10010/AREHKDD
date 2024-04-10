@@ -21,17 +21,30 @@ X2 = np.array([[-0.85,-0.6], [-.12,-0.6],[-.6,-.15], [-.6,-.9], [-.4, -.95], [-0
 X = np.append(X, X2, axis=0)
 Y = np.append(Y, np.array([1]*len(X2)))
 plt.scatter(X[:,0], X[:,1], edgecolors = 'k', c= Y.tolist())
+random_seeds = [0, 1, 2, 3, 4, 5, 10, 100, 1000, 10000]
 
 
-algo = IForest(random_state=0)
-algo.fit(X)
-y_score = algo.decision_function(X)
-print(roc_auc_score(Y.reshape(-1), y_score))
+iForest_roc = 0
+for seed in random_seeds:
+	algo = IForest(random_state=seed)
+	algo.fit(X)
+	y_score = algo.decision_function(X)
+	iForest_roc += roc_auc_score(Y.reshape(-1), y_score) /len(random_seeds)
+
 from ARDEH import ADERH
 
-aderh = ADERH(random_state=0)
-aderh.fit(X)
-outlier_scoer, label = aderh.decision_function(X), aderh.labels_
-print(roc_auc_score(Y.reshape(-1), outlier_scoer))
 
+print('Iforest:ROC:', iForest_roc)
+
+aderh_roc = 0
+
+for seed in random_seeds:
+	aderh = ADERH(random_state=seed)
+	aderh.fit(X)
+	outlier_scoer, label = aderh.decision_function(X), aderh.labels_
+	aderh_roc += roc_auc_score(Y.reshape(-1), outlier_scoer) / len(random_seeds)
+
+
+
+print('ADERH_ROC:', aderh_roc)
 plt.show()
