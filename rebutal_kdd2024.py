@@ -1,5 +1,4 @@
 
-# Gesamter Python-Code, um die angepasste Exponentialfunktion und lineare Funktion zu zeichnen
 
 import matplotlib.pyplot as plt
 import numpy as np
