@@ -24,7 +24,6 @@ algo_dic ={'ADERH':ADERH, 'INNE':INNE, 'IForest':IForest, 'LOF':LOF, 'LODA': LOD
 import glob
 import numpy as np
 
-algo_dic ={'ADERH':ADERH}
 sss = StratifiedShuffleSplit(n_splits=3, test_size=0.3, random_state=0)
 
 random_seeds = [0, 1, 2, 1000, 10000]
