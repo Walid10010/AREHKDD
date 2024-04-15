@@ -20,23 +20,22 @@ from sklearn.model_selection import StratifiedShuffleSplit
 
 
 algo_dic ={'ADERH':ADERH, 'INNE':INNE, 'IForest':IForest, 'LOF':LOF, 'LODA': LODA, 'COPOD':COPOD, 'ECOD':ECOD}
-remove_ = [ 'smtp',  '5_campaign', '15_Hepatitis', '39_vertebral', '10_cover', '38_thyroid',
- '27_PageBlocks','1_ALOI', '32_shuttle','29_Pima', '47_yeast', '2_annthyroid', 'Cardiotocography' , 'iono',   'mammo', 'magic', 'fraud']
+
 import glob
 import numpy as np
 
+algo_dic ={'ADERH':ADERH}
 sss = StratifiedShuffleSplit(n_splits=3, test_size=0.3, random_state=0)
 
 random_seeds = [0, 1, 2, 1000, 10000]
 
-for data_name in glob.glob('Classical/*'):
+for data_name in glob.glob('Dataset/*'):
     if 'donor'   in data_name: continue
     print(data_name)
     if '9_c' in data_name:continue
     tt = False
     for algo_name in algo_dic:
-        for name in remove_:
-            if name in data_name:tt = True
+
         if tt: continue
         data = np.load('{}'.format(data_name),
                    allow_pickle=True)
