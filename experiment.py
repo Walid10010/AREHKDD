@@ -13,6 +13,8 @@ from ARDEH import ADERH
 from sklearn.metrics import roc_auc_score
 import glob
 
+# EIF: please use this version for EIF https://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/eif.html
+# PIDForest: https://github.com/vatsalsharan/pidforest
 
 algo_dic ={'ADERH':ADERH, 'INNE':INNE, 'IForest':IForest, 'DIF':DIF, 'LOF':LOF, 'LODA': LODA, 'SO_GAAL':SO_GAAL, 'RCA':RCA, 'RDP':RDP, 'DBSCAN':DBSCAN, 'OCSVM':OCSVM }
 

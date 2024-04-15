@@ -19,12 +19,13 @@ import glob
 from sklearn.model_selection import StratifiedShuffleSplit
 
 
-algo_dic ={'ADERH':ADERH, 'INNE':INNE, 'IForest':IForest, 'LOF':LOF, 'LODA': LODA, 'COPOD':COPOD, 'ECOD':ECOD}
+algo_dic ={'ADERH':ADERH, 'INNE':INNE, 'IForest':IForest, 'DIF': DIF, 'LOF':LOF, 'LODA': LODA, 'COPOD':COPOD, 'ECOD':ECOD, 'RCA':RCA,
+           'RDP':RDP, 'OCSVM':OCSVM}
 
 import glob
 import numpy as np
 
-sss = StratifiedShuffleSplit(n_splits=3, test_size=0.3, random_state=0)
+sss = StratifiedShuffleSplit(n_splits=3, test_size=0.3, random_state=0 )
 
 random_seeds = [0, 1, 2, 1000, 10000]
 
