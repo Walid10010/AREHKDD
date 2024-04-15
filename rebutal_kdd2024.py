@@ -10,18 +10,16 @@ from pyod.models.iforest import IForest
 
 
 import matplotlib.pyplot as plt
-from sklearn.datasets import make_blobs
 
-X, Y = make_blobs( n_samples=1000,centers=1, center_box=(-0.5, -0.5), random_state=0, cluster_std=0.1, )
-X2, Y2= make_blobs(n_samples=1000, centers=1, center_box=(0, 0), random_state=0, cluster_std=0.1, )
-X = np.append(X, X2, axis=0)
-Y = np.array([0]*len(X))
-X2 = np.array([[-0.85,-0.6], [-.12,-0.6],[-.6,-.15], [-.6,-.9], [-.4, -.95], [-0.85,-0.5], [0.3, 0.2], [0.2, 0.2], [-0.4, 0.15], [0.3, -.2] ])
-X = np.append(X, X2, axis=0)
-Y = np.append(Y, np.array([1]*len(X2)))
-plt.scatter(X[:,0], X[:,1], edgecolors = 'k', c= Y.tolist())
+
+X, Y = np.loadtxt('rebuttaldata.csv'), np.loadtxt('rebuttallabel.csv')
+a = plt.scatter(X[Y==0,0], X[Y==0,1])
+b = plt.scatter(X[Y==1,0], X[Y==1,1])
+
 random_seeds = [0, 1, 2, 3, 4, 5, 10, 100, 1000, 10000]
-
+plt.legend((a,b), ('Normal', 'Outlier'))
+# plt.axis('off')
+plt.show()
 
 iForest_roc = 0
 for seed in random_seeds:
@@ -46,4 +44,3 @@ for seed in random_seeds:
 
 
 print('ADERH_ROC:', aderh_roc)
-plt.show()
