@@ -13,11 +13,14 @@ import matplotlib.pyplot as plt
 
 
 X, Y = np.loadtxt('rebuttaldata.csv'), np.loadtxt('rebuttallabel.csv')
+
+# np.savetxt('rebuttaldata.csv', X), np.savetxt('rebuttallabel.csv', Y)
 a = plt.scatter(X[Y==0,0], X[Y==0,1])
 b = plt.scatter(X[Y==1,0], X[Y==1,1])
 
 random_seeds = [0, 1, 2, 3, 4, 5, 10, 100, 1000, 10000]
 plt.legend((a,b), ('Normal', 'Outlier'))
+plt.savefig('RebuttalKdd2024_remote_cluster.jpg')
 # plt.axis('off')
 plt.show()
 
