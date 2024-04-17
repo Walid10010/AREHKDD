@@ -25,7 +25,7 @@ import numpy as np
 random_seeds = [0, 1, 2, 3, 4, 5, 10, 100, 1000, 10000]
 
 for data_name in glob.glob('Dataset/*'):
-    if 'reast'  not in data_name: continue
+   
     for algo_name in algo_dic:
 
         data = np.load('{}'.format(data_name),
