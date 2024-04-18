@@ -30,8 +30,7 @@ sss = StratifiedShuffleSplit(n_splits=3, test_size=0.3, random_state=0 )
 random_seeds = [0, 1, 2, 1000, 10000]
 
 for data_name in glob.glob('Dataset/*'):
-    if 'donor'   in data_name: continue
-    print(data_name)
+
     if '9_c' in data_name:continue
     tt = False
     for algo_name in algo_dic:
