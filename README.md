@@ -22,3 +22,8 @@ The external dataset used in the experiment can be obtained from https://github.
 ## Demo
 
 In main.py a working example is given.
+
+
+## Experiment
+
+Run experiment.py 
